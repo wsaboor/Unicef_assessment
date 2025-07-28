@@ -34,11 +34,11 @@ This repository contains the UNICEF consultancy assessment deliverables focused 
     └── analysis.R
 
 ├── 04_output/              # Outputs: ANC4 and SBA summary
-    ├── anc_summary.csv     #Weighted ANC4 by year and U5MR status
-    └── sba_summary.csv     #Weighted SBA by year and U5MR status
+    ├── anc_summary.csv     # Weighted ANC4 by year and U5MR status
+    └── sba_summary.csv     # Weighted SBA by year and U5MR status
 
 ├── 05_report/              # Final report
-    ├── summary_report.Rmd  #Full visualization report
+    ├── summary_report.Rmd  # Full visualization report
     ├── summary_report.html
     └── summary_report.pdf
 </pre>
@@ -49,8 +49,8 @@ This repository contains the UNICEF consultancy assessment deliverables focused 
 The assessment analyzes maternal health coverage:
 - **ANC4**: 4+ antenatal care visits
 - **SBA**: Skilled birth attendance
-  
-- The analysis assesses antenatal care (ANC4) and skilled birth attendance (SBA) coverage. Countries were grouped by their U5MR progress status ("Achieved", "On Track", "Acceleration Needed"). Coverage values were *weighted by births* using UN demographic data (WPP 2022), offering a more equitable view of service access.
+
+The analysis assesses antenatal care (ANC4) and skilled birth attendance (SBA) coverage. Countries were grouped by their U5MR progress status ("Achieved", "On Track", "Acceleration Needed"). Coverage values were *weighted by births* using UN demographic data (WPP 2022), offering a more equitable view of service access.
 
 
 ## Key Findings
@@ -63,7 +63,6 @@ The assessment analyzes maternal health coverage:
 
 All code is located in `03_scripts/`. You can regenerate the entire workflow by running:
 
-```r
 source("03_scripts/run_project.R")
 
 
