@@ -15,7 +15,7 @@ This repository contains the UNICEF consultancy assessment deliverables focused 
 
 <pre>
   
-├── 01_rawdata/           # Raw datasets
+├── 01_rawdata/          # Raw datasets
     ├── ANC4.csv          
     ├── SBA.csv
     ├── On-track and off-track countries.xlsx
@@ -27,17 +27,17 @@ This repository contains the UNICEF consultancy assessment deliverables focused 
     ├──  u5mr_status.csv
     └── WPP_clean.csv
 
-├── 03_scripts/           # R scripts for data cleaning and processing
+├── 03_scripts/            # R scripts for data cleaning and processing
     ├── data_cleaning.R
     ├── run_project.R      # Master script to run all steps
     ├── user_profile.R
     └── analysis.R
 
-├── 04_output/            # Outputs: ANC4 and SBA summary
-    ├── anc_summary.csv  #Weighted ANC4 by year and U5MR status
-    └── sba_summary.csv  #Weighted SBA by year and U5MR status
+├── 04_output/              # Outputs: ANC4 and SBA summary
+    ├── anc_summary.csv     #Weighted ANC4 by year and U5MR status
+    └── sba_summary.csv     #Weighted SBA by year and U5MR status
 
-├── 05_report/            # Final report
+├── 05_report/              # Final report
     ├── summary_report.Rmd  #Full visualization report
     ├── summary_report.html
     └── summary_report.pdf
