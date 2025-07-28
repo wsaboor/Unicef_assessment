@@ -2,15 +2,10 @@
 
 This repository contains the UNICEF consultancy assessment deliverables focused on analyzing population-weighted health coverage (ANC4 and SBA) by under-five mortality (U5MR) track status.
 
-## Structure
+## Project Structure
 
-- `01_rawdata/` — Original raw data files.
-- `02_cleaneddata/` — Cleaned datasets used in analysis.
-- `03_scripts/` — R scripts for data processing and analysis.
-- `04_output/` — Visualizations and tabular outputs.
-- `05_report/` — Final report (RMarkdown, HTML, and PDF formats).
-
-- UNICEF_assessment/
+<pre>
+```
   
 ├── 01_rawdata/           # Raw datasets
     ├── ANC4.csv          
@@ -38,6 +33,9 @@ This repository contains the UNICEF consultancy assessment deliverables focused 
     ├── summary_report.Rmd
     ├── summary_report.html
     └── summary_report.pdf
+```
+</pre>
+
 
 ## Summary
 
