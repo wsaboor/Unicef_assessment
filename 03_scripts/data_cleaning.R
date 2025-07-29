@@ -37,8 +37,8 @@ u5mr_status <- read_excel(u5mr_file) %>%
   ) %>%
   mutate(country = tolower(str_replace_all(str_trim(country), "[^a-z ]", "")))
 
-# ---- Load and Clean WPP Estimates Sheet ----
-wpp_raw <- read_excel(wpp_file, sheet = "Estimates", skip = 16)
+# ---- Load and Clean WPP Projections Sheet ----
+wpp_raw <- read_excel(wpp_file, sheet = "Projections", skip = 16)
 
 wpp_clean <- wpp_raw %>%
   clean_names() %>%
@@ -46,14 +46,15 @@ wpp_clean <- wpp_raw %>%
     country = region_subregion_country_or_area
   ) %>%
   filter(
-    variant == "Estimates",
+    variant == "Medium",                     # Use Medium variant (standard projections)
+    year == 2022,                            # Only keep data for 2022
     !is.na(births_thousands),
     births_thousands > 0,
     !str_detect(country, "WORLD|REGION|More developed|Less developed|Least developed|income|SDG")
   ) %>%
   select(
     country,
-    year = year,
+    year,
     births_thousands,
     female_mortality_15_60 = female_mortality_between_age_15_and_60_deaths_under_age_60_per_1_000_females_alive_at_age_15,
     male_mortality_15_60 = male_mortality_between_age_15_and_60_deaths_under_age_60_per_1_000_males_alive_at_age_15,
@@ -61,12 +62,12 @@ wpp_clean <- wpp_raw %>%
   ) %>%
   mutate(
     country = tolower(str_replace_all(str_trim(country), "[^a-z ]", "")),
-    year = as.numeric(year),
     births = as.numeric(births_thousands) * 1000,
     female_mortality_15_60 = as.numeric(female_mortality_15_60),
     male_mortality_15_60 = as.numeric(male_mortality_15_60),
     net_migration_rate = as.numeric(net_migration_rate)
   )
+
 
 # ---- Save Cleaned Outputs ----
 write_csv(anc4, clean_anc4)

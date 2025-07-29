@@ -14,3 +14,4 @@ source("03_scripts/analysis.R")
 # Step 4: Render the final report from RMarkdown to HTML
 rmarkdown::render("05_report/summary_report.Rmd", output_format = "html_document")
 rmarkdown::render("05_report/summary_report.Rmd", output_format = "pdf_document")
+rmarkdown::render("05_report/summary_report.Rmd", output_format = "word_document")

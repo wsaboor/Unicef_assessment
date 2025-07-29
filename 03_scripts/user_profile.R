@@ -7,6 +7,8 @@ library(readxl)
 library(janitor)
 library(here)
 library(writexl)
+library(readr)
+
 
 # Global options
 options(scipen = 999)  # to turn off scientific notation
