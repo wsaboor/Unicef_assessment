@@ -40,24 +40,27 @@ This repository contains the UNICEF consultancy assessment deliverables focused 
 ├── 05_report/              # Final report
     ├── summary_report.Rmd  # Full visualization report
     ├── summary_report.html
-    └── summary_report.pdf
+    ├── summary_report.pdf
+    └── summary_report.docx
 </pre>
 
 
 ## Summary
 
-The assessment analyzes maternal health coverage:
-- **ANC4**: 4+ antenatal care visits
-- **SBA**: Skilled birth attendance
+This assessment analyzes maternal health coverage using:
+- **ANC4**: Percentage of women (aged 15–49) receiving at least four antenatal care visits.
+- **SBA**: Percentage of births attended by skilled health personnel.
 
-The analysis assesses antenatal care (ANC4) and skilled birth attendance (SBA) coverage. Countries were grouped by their U5MR progress status ("Achieved", "On Track", "Acceleration Needed"). Coverage values were *weighted by births* using UN demographic data (WPP 2022), offering a more equitable view of service access.
+Countries were grouped by their under-five mortality (U5MR) status: **Achieved**, **On Track**, and **Acceleration Needed**. Coverage values were *weighted by projected births in 2022* (sourced from the UN World Population Prospects), providing a population-sensitive comparison of maternal health service access.
 
 
 ## Key Findings
 
-- **On-track countries** show consistently higher weighted ANC4 and SBA coverage.
-- **Acceleration needed countries** show persistent disparities in access.
-- **Policy insight**: Greater investment and health system strengthening are needed in lagging countries.
+- **On-track countries** have consistently higher ANC4 and SBA coverage when adjusted for 2022 projected births.
+- **Acceleration needed countries** show significantly lower weighted coverage, reflecting persistent service delivery gaps.
+- **Equity insight**: Population-weighted results emphasize disparities in maternal care access not visible in unweighted averages.
+- **Policy implication**: Targeted investments are needed to scale up maternal health systems in countries falling behind U5MR targets.
+
 
 ## Reproducibility
 
