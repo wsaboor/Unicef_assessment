@@ -49,6 +49,7 @@ This repository contains the UNICEF consultancy assessment deliverables focused 
 This assessment analyzes maternal health coverage using:
 - **ANC4**: Percentage of women (aged 15–49) receiving at least four antenatal care visits.
 - **SBA**: Percentage of births attended by skilled health personnel.
+
 Countries were grouped by their under-five mortality (U5MR) status: _Achieved_, _On Track_, and _Acceleration Needed_. Coverage values were weighted by projected births in 2022 (from the UN World Population Prospects), providing a population-sensitive view of maternal health service access.
 
 ## Key Findings
@@ -61,6 +62,7 @@ Countries were grouped by their under-five mortality (U5MR) status: _Achieved_, 
 ## Reproducibility
 
 All code is located in `03_scripts/`. You can regenerate the entire workflow by running:
+
 source("03_scripts/run_project.R")
 
 ## References
