@@ -1,0 +1,114 @@
+---
+title: "UNICEF Consultancy Assessment Report"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+  pdf_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+    latex_engine: xelatex
+---
+\newpage
+
+# Introduction
+
+This report presents a data-driven assessment of two essential maternal health indicators: **Antenatal Care (ANC4)** and **Skilled Birth Attendance (SBA)**. The analysis focuses on understanding how coverage levels differ over time across countries grouped by their **Under-5 Mortality Rate (U5MR) progress status**: _Achieved_, _On Track_, and _Acceleration Needed_. By visualizing trends and comparing weighted averages based on annual births, this report highlights disparities and informs policy interventions that can accelerate progress toward global child health goals.
+
+These groups show how well each country is doing in terms of achieving the **Sustainable Development Goal (SDG)** objective for under-five mortality, which is 25 deaths per 1,000 live births by 2030. While Acceleration Needed indicates countries who are off-track and need to make faster progress, countries that have Achieved the target or are On Track to accomplish it are those with better child survival results.
+
+## Data Sources:
+This assessment integrates multiple data sources to enable robust, population-weighted analyses. National coverage estimates for ANC4, and SBA were sourced from UNICEF’s global maternal and newborn health coverage databases. The number of live births per country was obtained from the WPP 2022 dataset. Lastly, country classifications for progress toward the Sustainable Development Goal (SDG) target on under-five mortality (U5MR) – categorized as Achieved, On Track, or Acceleration Needed – were based on data provided by UNICEF.
+These datasets were cleaned and harmonized to ensure consistency, including aligning country identifiers, selecting comparable years (primarily 2018–2022), and addressing missing values. This combined set of data is used to calculate population-weighted values and determine the significance of trends across countries.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+library(tidyverse)
+library(readr)
+library(here)
+
+anc_summary <- read_csv(here("04_outputs", "anc_summary.csv"))
+sba_summary <- read_csv(here("04_outputs", "sba_summary.csv"))
+```
+
+# Findings and Interpretation of Coverage Comparisons
+Both **ANC4** and **SBA** coverage are consistently much greater in countries that have _Achieved_ or are _On Track_ to reach the U5MR objective. In comparison, coverage is significantly lower in countries that are categorized as _Acceleration Needed_. This service coverage discrepancy highlights an equity divide linked to child mortality outcomes. This gap in service coverage highlights an equity divide correlated with child mortality outcomes.
+
+## Antenatal Care (ANC4) Coverage
+Most pregnant women in countries with higher U5MR outcomes (Achieved or On Track) receive four or more prenatal care visits. For instance, in 2021, the average birth-weighted ANC4 coverage in countries that met the U5MR objective was almost 90%, but in countries that required acceleration, it was only about 57%. Compared to nearly 90% of pregnant women in on-track countries, just under two-thirds of expectant moms in off-track countries benefit from the advised ANC4 visits. According to trend statistics, ANC4 coverage in the _Acceleration Needed_ category has increased slightly in recent years, from approximately 52% in 2019 to 57% in 2021; however, it remains significantly lower than that of the on-track group. The _Achieved/On Track countries_, on the other hand, have consistently benefited from high ANC4 coverage (around 85–95%) over the same time frame. This glaring disparity highlights the fact that women in off-track nations may not receive the same level of prenatal care, which may play a role in their delayed improvements in child survival.
+
+```{r anc4_plot, fig.width=8, fig.height=5}
+ggplot(anc_summary, aes(x = year, y = weighted_anc4, color = status)) +
+  geom_line(size = 1.2) +
+  geom_point(size = 2) +
+  labs(
+    title = "Weighted ANC4 Coverage by U5MR Status",
+    x = "Year",
+    y = "ANC4 Coverage (%)",
+    color = "U5MR Status"
+  ) +
+  theme_minimal()
+```
+
+**Interpretation:** Countries that have _Achieved_ or are _On Track_ demonstrate better access to ANC4 coverage when weighted by births. While those marked _Acceleration Needed_ lag behind. This disparity signals an urgent need for targeted policy and resources investment in the latter group to reduce maternal and child helath inequalities.
+
+## Skilled Birth Attendance (SBA) Coverage
+A similar trend is observed for skilled birth attendance. Countries with better U5MR status have the highest birth-weighted SBA coverage, whereas those that require acceleration have the lowest. While countries that need acceleration had an average of roughly 57% SBA coverage in 2021, countries that had already met the child mortality target had an average of 96% of live births attended by qualified health professionals. In other words, whereas on-track countries have almost universal coverage, nearly half of births in off-track countries happen without a trained attendant. The _Acceleration Needed_ category's SBA coverage fluctuated somewhat, ranging from a projected 67% in 2019 to 72% in 2020 and then dropping to 57% in 2021. This volatility may reflect updates to data or variations in country data availability, but the overall level remains low. Meanwhile, throughout recent years, _Achieved_ countries have maintained SBA coverage rates in the mid-90s percentage range. The concern that inadequate coverage of skilled delivery care is associated with increased risks of child and newborn mortality in the latter group is associated with the continuously high SBA rates in on-track nations compared to the significantly lower rates in off-track countries.
+
+```{r sba_plot, fig.width=8, fig.height=5}
+ggplot(sba_summary, aes(x = year, y = weighted_sba, color = status)) +
+  geom_line(size = 1.2) +
+  geom_point(size = 2) +
+  labs(
+    title = "Weighted SBA Coverage by U5MR Status",
+    x = "Year",
+    y = "SBA Coverage (%)",
+    color = "U5MR Status"
+  ) +
+  theme_minimal()
+```
+
+**Interpretation:** SBA coverage shows a similar pattern. Birth-weighted coverage is highest in countries with better U5MR outcomes and lowest in those needing acceleration.
+
+## Summary Table: ANC4 and SBA
+Overall, the comparative analysis reveals a persistent equity gap. Even after population size variations are taken into consideration, countries that need to make faster progress on U5MR have significantly lower coverage of essential maternal health services. These findings are particularly policy relevant because we used a population-weighted average, where larger populations contribute more to the average, which reflects the reality for the majority of mothers and children in each category. For example, those countries that are off-track (often in sub-Saharan Africa or South Asia) have significantly lower average coverage in that category, indicating that millions of births are taking place with insufficient care. On the other hand, the high averages of the on-track group show that robust health service coverage often accompanies effective child survival advancement. According to these findings, boosting ANC4 and SBA coverage in off-track areas is likely a key tactic for improving child survival rates. **In summary, countries on track to meet child mortality goals have achieved far greater coverage of antenatal and delivery care services than those off track, highlighting a need for targeted improvements in the latter**.
+
+```{r summary_table, fig.width=8}
+left_join(anc_summary, sba_summary, by = c("year", "status")) %>%
+  arrange(desc(year)) %>%
+  select(year, status, weighted_anc4, weighted_sba, n_countries.x) %>%
+  rename(
+    `Year` = year,
+    `Status` = status,
+    `ANC4 (%)` = weighted_anc4,
+    `SBA (%)` = weighted_sba,
+    `# Countries` = n_countries.x
+  ) %>%
+  knitr::kable(digits = 1, caption = "Weighted ANC4 and SBA Coverage by Year and U5MR Status")
+```
+
+# Key Findings
+1. **ANC4 Coverage Patterns:** 
+- Countries in the Achieved and On Track U5MR status consistently report higher ANC4 coverage (>85%) across 2018–2021.
+_Acceleration Needed_ countries have lower ANC4 coverage (47–57%), though showing gradual improvement over time.
+2. **SBA Coverage Patterns:**
+- A similar trend is observed in Skilled Birth Attendance (SBA) coverage: Achieved and On Track countries consistently outperform Acceleration Needed ones.
+- In 2021, SBA coverage was ~95% for Achieved, ~85% for On Track, and ~70% for Acceleration Needed countries.
+3. **Coverage Gaps by U5MR Track:**
+- There is a clear disparity in both ANC4 and SBA coverage between Acceleration Needed and other categories.
+- Despite improvements, _Acceleration Needed_ countries continue to lag behind, indicating systemic barriers to maternal healthcare.
+4. **Weighted Analysis Insights:**
+- Using birth-weighted averages, the analysis reveals a more nuanced picture of coverage disparities reflecting true impact on the population.
+- Countries with higher birth counts influence regional and global trends more significantly.
+
+# Conclusion
+The analysis reveals that significant disparities remain in maternal health coverage between countries classified by U5MR status. While countries in the _Achieved_ and _On Track_ categories consistently maintain high ANC4 and SBA coverage, those categorized as _Acceleration Needed_ continue to lag, despite gradual improvements. The birth-weighted approach enhances the accuracy of these insights by accounting for population size, emphasizing that countries with higher birth volumes have a more substantial impact on overall regional performance. These findings highlight the urgent need for targeted policy interventions and resource allocation to improve service delivery in under-performing countries, ensuring that progress in maternal healthcare is both equitable and sustainable.
+
+# References
+- UNICEF Data. (2024). Skilled Attendance at Birth and Antenatal Care Data. https://data.unicef.org/topic/maternal-health/antenatal-care/
+- UNICEF. (2024). Tracking Progress Towards Under-Five Mortality Targets. UNICEF Data Portal. https://data.unicef.org/topic/child-survival/under-five-mortality/
+- UNICEF. (2024). Global Databases on Child Health Coverage and Mortality Classifications.
+- United Nations. (2022). World Population Prospects 2022. Department of Economic and Social Affairs, Population Division. https://population.un.org/wpp/
