@@ -1,15 +1,7 @@
-## Positions Applied For
+# Health Coverage Analysis by U5MR Status
+#prepared by Wagma Saboor
 
-This assessment is submitted in support of the following consultancy positions at UNICEF:
-
-- Learning and Skills Data Analyst Consultant – Req. #581598  
-- Household Survey Data Analyst Consultant – Req. #581656  
-- Administrative Data Analyst – Req. #581696  
-- Microdata Harmonization Consultant – Req. #581699  
-
-# UNICEF Consultancy Assessment Report
-
-This repository contains the UNICEF consultancy assessment deliverables focused on analyzing population-weighted health coverage (ANC4 and SBA) by under-five mortality (U5MR) track status.
+This repository contains a data analysis project focused on population-weighted maternal health coverage indicators, specifically antenatal care (ANC4) and skilled birth attendance (SBA), grouped by under-five mortality (U5MR) track status.
 
 ## Project Structure
 
